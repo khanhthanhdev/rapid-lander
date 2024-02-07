@@ -1,3 +1,6 @@
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { pricingCards } from "@/lib/constants";
+import clsx from "clsx";
 import Image from "next/image";
 
 export default function Home() {
@@ -28,7 +31,25 @@ export default function Home() {
             Our straightforward pricing plans are tailored to meet you needs. If {" you're"} not <br/>
             ready to commit you can get started for free
           </p>
-      </section>  
+      </section> 
+      <div className="flex items-center justify-center gap-4 flex-wrap mt-6">
+        {pricingCards.map((card) => (
+          <Card key={card.title} className={clsx('w-[300px] flex flex-col justify-between', {"border-2 border-primary": card.title === 'Unlimited Saas'})}>
+
+              <CardHeader>
+                <CardTitle 
+                  className={clsx('', {'text-muted-foreground': card.title !== 'Unlimited Saas'})}
+                >
+                  {card.title}
+                </CardTitle>
+                <CardDescription>
+                  {card.description}
+                </CardDescription>
+              </CardHeader>
+            </Card>
+        ))}
+      </div>
+
     </main>
   );
 }
